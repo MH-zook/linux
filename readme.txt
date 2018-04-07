@@ -16,5 +16,9 @@ test
 =======
 >>>>>>> master
 creating a new line to test.
+<<<<<<< HEAD
 >>>>>>> hero
 add a new line by zook
+=======
+hero
+>>>>>>> hero
