@@ -4,4 +4,8 @@ hello family
 hello master
 =======
 hello hero
+<<<<<<< HEAD
+>>>>>>> hero
+=======
+hello hero
 >>>>>>> hero
