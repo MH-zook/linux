@@ -13,4 +13,8 @@ gittest by zook
 >>>>>>> zook
 =======
 git test by new
+<<<<<<< HEAD
+>>>>>>> new
+=======
+gittest stash by new
 >>>>>>> new
