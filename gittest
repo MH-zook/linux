@@ -5,8 +5,12 @@ git 789
 git 456
 git123456789abc
 <<<<<<< HEAD
+<<<<<<< HEAD
 gittest by hero
 gittest again bu hero
 =======
 gittest by zook
 >>>>>>> zook
+=======
+git test by new
+>>>>>>> new
