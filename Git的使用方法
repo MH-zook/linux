@@ -26,8 +26,8 @@ git push origin :branchname		##推送空的分支到远程分支/删除分支
 git merge branchname			##合并当前分支内容到branchname
 git stash				##隐藏当前正在编辑的文件
 git stash list				##查看当前隐藏文件
-git stash pop  		#当list里面只有一个工作区的时候，可以使用pop，恢复的同时会删除stash内容
-git stash apply stash@{0} 	#当list有多个工作区的时候，使用apply 加上stash@{NUM} 来恢复工作区，恢复之后需要手动删除
+git stash pop  				#当list里面只有一个工作区的时候，可以使用pop，恢复的同时会删除stash内容
+git stash apply stash@{0} 		#当list有多个工作区的时候，使用apply 加上stash@{NUM} 来恢复工作区，恢复之后需要手动删除
 git stash drop stash@{num}		##删除隐藏文件
 git clone git@github.com:MH-zook/repository.git
 git pull -u origin master		##拉取远程信息
@@ -97,6 +97,7 @@ If the identity used for this commit is wrong, you can fix it with:
 
  1 files changed, 1 insertions(+), 0 deletions(-)
  create mode 100644 gittest
+
 6.修改已经提交的文件之后怎么查看是否有修改
 #git diff ##新老文件对比
 # echo "git123456789abc" >> gittest 
@@ -108,6 +109,7 @@ index 8b13789..918941b 100644
 @@ -1 +1,2 @@
  
 +git123456789abc  ##新增的一行内容
+
 
 时光机穿梭
 1.怎么恢复以前的版本？
@@ -152,6 +154,7 @@ Author: root <root@VM_2_9_centos.(none)>
 Date:   Wed Apr 4 19:25:52 2018 +0800
 
     wrote a gittest file
+
 2.怎么回到较新的版本呢？
 # git reflog			##记录所有的历史版本号
 634f06f HEAD@{0}: 634f06: updating HEAD
@@ -167,6 +170,7 @@ git 456
 git 789
 git 456
 git123456789abc
+
 
 工作区：指本机git的仓库中的文件
 版本库：指git仓库中的.git 包括暂存区（stage）、存储区（master）
@@ -186,6 +190,7 @@ git checkout -- filename ##恢复版本库的文件到工作区
 如果只是在工作区删除了文件
 可以直接git checkout -- filename 恢复到和版本库一样
 
+
 远程仓库
 1.新建远程仓库
 2.ssh-keygen -t rsa -C "youremail@example.com"
@@ -194,11 +199,13 @@ git checkout -- filename ##恢复版本库的文件到工作区
 5.git push -u origin master	#由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
 5.1以后可以使用:#git push origin master 
 
+
 从远程仓库克隆
 前提：你已经有一个远程仓库或者克隆别人的远程仓库
 git clone git@github.com:MH-zook/zook.git
 cd zook
 ls
+
 
 分支管理
 master主分支，其他分支与其平行，当相交的时候就是指分支合并
@@ -208,6 +215,8 @@ git branch hero		#创建hero分支
 git checkout 分支名	#切换分支
 git merge hero -m "massege"	#如果当前分支是master 就是把hero的内容合并到master
 git branch -d branchname	#删除分支
+注：当在hero分支修改文件之后，需要提交才可以切换分支（也可以隐藏），切换分支后合并master分支，然后master分支可以不用提交，直接push --all 到远程仓库 也可以git push -u origin master只同步这一个分支的更新
+
 
 解决冲突
 列子：
@@ -258,6 +267,7 @@ git commit -m ""
 git log --graph --pretty=oneline --abbrev-commit
 或者git log --graph
 
+
 分支管理策略
 一般合并的时候会采用“Fast forward”模式，这种模式下，删除分支后，会丢掉分支信息。
 如果要强制禁用 “Fast forward”模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。
@@ -279,6 +289,7 @@ Bug分支用来修复bug，临时创建，切换到bug分区，提交修复，�
 3.1 git stash pop  #当list里面只有一个工作区的时候，可以使用pop，恢复的同时会删除stash内容。
 3.2 git stash apply stash@{0} #当list有多个工作区的时候，使用apply 加上stash@{NUM} 来恢复工作区，恢复之后需要手动删除
 git stash drop stash@{num} 删除使用
+
 
 Feature 分支
 软件开发中，总有无穷无尽的新的功能要不断添加进来。
@@ -320,7 +331,7 @@ git branch --set-upstream dev origin/dev
 疑问2：使用“--no-ff”这个参数怎么判断分支的改变？
 
 
-
+ 标签管理待续......
 
 
 
