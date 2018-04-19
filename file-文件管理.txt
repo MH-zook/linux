@@ -1,0 +1,44 @@
+实验-基础操作
+ll -a /home/qin
+touch .abc
+touch fi\\e
+touch 'fi\e'
+
+umast
+
+实验-更改文件权限
+touch file1
+chown qin:qin file1
+chown root file1
+chown :root file1
+chmod o+rwx file1
+mkdir qin/
+chmod g+w qin
+chmod o=rw file1
+
+更改文件|目录的属性
+实验-chattr和lsattr
+lsattr /etc/resolv.conf
+chattr +i /etc/resolv.conf	#不能修改，不能删除
+lsattr /etc/resolv.conf		#查看文件的特殊属性
+chattr -i +a /etc/resolv.conf	#只能追加，不能删除
+lsattr /etc/resolv.conf
+echo qin >> /etc/resolv.conf	
+
+文件|目录的访问控制策略
+实验-setfacl
+mkdir /caiwubu
+touch /caiwubu/zhangben
+su - qin
+rm /caiwubu/zhangben	#权限不足
+setfacl -m u:qin:rwx -R /caiwubu
+getfacl /caiwubu/zhangben
+su - qin
+rm /caiwubu/zhangben	#可以删除
+setfacl -m d:u:qin:rwx /caiwubu
+setfacl -x u:qin /caiwubu/zhangben
+
+实验-链接
+cp /etc/passwd passwd1
+ln -s /etc/passwd passwd2
+ln /etc/passwd passwd3
