@@ -1,0 +1,328 @@
+Git使用方法
+Git：分布式版本控制系统
+对应的有集中式版本控制系统 CVS、SVN
+分布式版本控制系统简单介绍：分布式版本控制系统就是把仓库（文件）放在多个计算机上，每台计算机上都有一个本地仓库，当一台计算机的文件修改之后，通过提交修改内容，其它计算机也会同步修改内容。
+Git使用方法主要有一下几个命令：
+yum install git					##安装Git
+git remote add origin git@github.com:MH-zook/zook.git		##关联远程仓库
+git init 版本库名称				##创建版本库
+git add filename				##向仓库中添加文件
+git status						##查看仓库状态
+git commit -m "inpu the flag"		##提交添加的文件到仓库
+git log						##查看仓库日志信息
+git log --pretty=oneline			##查看日志--简洁版
+git reflog 						##查看历史文件版本号
+git reset --hard HEAD			##查看当前版本信息
+git reset --hard 版本号			##时光穿梭到历史版本
+git checkout -b branchname		##创建远程分支，并切换分支
+git branch branchname			## 创建远程分支
+git checkout branchname		##切换远程分支
+git branch -d branchname		##删除本地分支
+git branch -r -D branchname		##删除远端分支
+git push origin :branchname		##推送空的分支到远程分支/删除分支
+git merge branchname			##合并当前分支内容到branchname
+git stash						##隐藏当前正在编辑的文件
+git stash list					##查看当前隐藏文件
+git stash pop  		#当list里面只有一个工作区的时候，可以使用pop，恢复的同时会删除stash内容
+git stash apply stash@{0} 	#当list有多个工作区的时候，使用apply 加上stash@{NUM} 来恢复工作区，恢复之后需要手动删除
+git stash drop stash@{num}		##删除隐藏文件
+git clone git@github.com:MH-zook/repository.git
+git pull -u origin master			##拉取远程信息
+git push -u origin master			##推动本地信息到远程
+标签管理待更新
+
+
+1.Git的安装
+在linux上安装，一般centos、Redhat自带这个命令
+#yum install git
+or
+ubuntu and Debian系统
+$sudo apt-get install git  ##老一点的Debian或Ubuntu Linux，要把命令改为“sudo apt-get install git-core”，因为以前有个软件也叫GIT（GNU Interactive 		Tools），结果Git就只能叫git-core了。由于Git名气实在太大，后来就把GNU Interactive Tools改成gnuit，git-core正式改为git。
+源码安装：先从Git官网下载源码，然后解压，依次输入：./config，make，sudo make install这几个命令安装就好了。
+
+2.Git init创建版本库 
+git init 仓库目录 ## 创建仓库之后，会在仓库目录下面生成.git的隐藏文件。
+# git log
+fatal: Not a git repository (or any of the parent directories): .git
+# mkdir gitdata
+# pwd
+/
+# git init gitdata/
+# ll -a gitdata/
+total 16
+drwxr-xr-x   7 root root 4096 Apr  4 19:12 .git
+
+3.Git add 文件名 ##把文件添加到仓库   注意，可反复多次使用，添加多个文件；
+查看仓库状态
+# git status
+# On branch master
+# Initial commit
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#	gittest  ##未添加的文件
+# cd gitdata/
+# touch gittest
+# echo >> gittest << EOF
+> git is version control system.
+> git is free software.
+> EOF
+# git add gittest 
+
+4.Git status ##查看仓库的状态，如果有更新，显示更新状态，如果没有更新则显示
+# git status
+# On branch master
+# Initial commit
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#	new file:   gittest  ##新添加的文件
+
+5.Git commit ##提交文件到仓库
+# git commit -m "wrote a gittest file"
+##-m 填写提交的时候的备注信息，建议都填写，后面要恢复老版本的时候需要用到
+[master (root-commit) 8d73b9d] wrote a gittest file
+ Committer: root <root@VM_2_9_centos.(none)>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+If the identity used for this commit is wrong, you can fix it with:
+
+    git commit --amend --author='Your Name <you@example.com>'
+
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 gittest
+6.修改已经提交的文件之后怎么查看是否有修改
+#git diff ##新老文件对比
+# echo "git123456789abc" >> gittest 
+# git diff gittest 
+diff --git a/gittest b/gittest
+index 8b13789..918941b 100644
+--- a/gittest
++++ b/gittest
+@@ -1 +1,2 @@
+ 
++git123456789abc  ##新增的一行内容
+
+时光机穿梭
+1.怎么恢复以前的版本？
+a.git log 查看仓库日志信息
+# git log
+commit 10874470bb295f22c9c8e168df9672a11054f722 ##版本号
+Author: root <root@VM_2_9_centos.(none)>
+Date:   Wed Apr 4 19:51:53 2018 +0800
+
+    add git 456					##最后一次提交的版本
+
+commit 634f06f585ddf38e680f23e10d26d65a855f380c ##版本号
+Author: root <root@VM_2_9_centos.(none)>
+Date:   Wed Apr 4 19:51:05 2018 +0800
+
+    add git 123					##第二次提交的版本
+
+commit 8d73b9d2f9cf47fe7ed9510e9548dd0164297395 ##版本号
+Author: root <root@VM_2_9_centos.(none)>
+Date:   Wed Apr 4 19:25:52 2018 +0800
+
+    wrote a gittest file		##第一次提交的版本
+# git log --pretty=oneline				##--pretty=oneline加参数，看起来更简洁
+10874470bb295f22c9c8e168df9672a11054f722 add git 456
+634f06f585ddf38e680f23e10d26d65a855f380c add git 123
+8d73b9d2f9cf47fe7ed9510e9548dd0164297395 wrote a gittest file
+# git reset --hard HEAD  ##当前所在版本
+HEAD is now at 1087447 add git 456
+# git reset --hard 634f06  ##回到git 123 版本
+HEAD is now at 634f06f add git 123
+# git reset --hard HEAD   ##查看当前版本号
+HEAD is now at 634f06f add git 123
+# git log				##查看当前有哪些版本号
+commit 634f06f585ddf38e680f23e10d26d65a855f380c
+Author: root <root@VM_2_9_centos.(none)>
+Date:   Wed Apr 4 19:51:05 2018 +0800
+
+    add git 123
+
+commit 8d73b9d2f9cf47fe7ed9510e9548dd0164297395
+Author: root <root@VM_2_9_centos.(none)>
+Date:   Wed Apr 4 19:25:52 2018 +0800
+
+    wrote a gittest file
+2.怎么回到较新的版本呢？
+# git reflog			##记录所有的历史版本号
+634f06f HEAD@{0}: 634f06: updating HEAD
+1087447 HEAD@{1}: commit: add git 456
+634f06f HEAD@{2}: commit: add git 123
+8d73b9d HEAD@{3}: commit (initial): wrote a gittest file
+# git reset --hard 1087447
+HEAD is now at 1087447 add git 456
+[root@VM_2_9_centos gitdata]# cat gittest 
+git test
+git 123
+git 456
+git 789
+git 456
+git123456789abc
+
+工作区：指本机git的仓库中的文件
+版本库：指git仓库中的.git 包括暂存区（stage）、存储区（master）
+暂存区	工作区	
+git diff HEAD -- filename  等同git diff filename 
+git diff filename		检查工作区的文件和版本库中的文件有没有变化
+git  checkout -- filename  撤销工作区编辑的操作
+git reset HEAD filename		撤销暂存区add的内容
+删除工作区或者版本库的文件
+git rm filename 或者rm -rf filename之后还要git rm filename  #删除文件
+git commit -m "massege"	#提交删除
+删除之后怎么恢复
+如果版本库里已经删除了，就需要恢复版本库里以前的版本
+git reflog
+git reset --hard HEAD
+git checkout -- filename ##恢复版本库的文件到工作区
+如果只是在工作区删除了文件
+可以直接git checkout -- filename 恢复到和版本库一样
+
+远程仓库
+1.新建远程仓库
+2.ssh-keygen -t rsa -C "youremail@example.com"
+3.ADD SSH kye
+4.关联远程仓库  git remote add origin git@github.com:MH-zook/zook.git	#origin指远程仓库在本地的标识，MH-zook指github的用户名，zook指远程仓库名
+5.git push -u origin master	#由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+5.1以后可以使用:#git push origin master 
+
+从远程仓库克隆
+前提：你已经有一个远程仓库或者克隆别人的远程仓库
+git clone git@github.com:MH-zook/zook.git
+cd zook
+ls
+
+分支管理
+master主分支，其他分支与其平行，当相交的时候就是指分支合并
+git branch			#查看分支
+git branch hero		#创建hero分支
+或者 git checkout -b hero #创建分支，并切换分支
+git checkout 分支名	#切换分支
+git merge hero -m "massege"	#如果当前分支是master 就是把hero的内容合并到master
+git branch -d branchname	#删除分支
+
+解决冲突
+列子：
+新建一个分支dev
+git branch dev
+git checkout dev
+编辑readme.txt文件
+git add readme.txt
+git commit -m ""
+git checkout master
+编辑readme.txt 
+git add readme.txt
+git commit -m ""
+这时候dev 分支的readme和master分支的readme
+$ git merge dev
+Auto-merging readme.txt
+CONFLICT (content): Merge conflict in readme.txt
+Automatic merge failed; fix conflicts and then commit the result.
+要手动解决冲突，再提交
+git status可以告诉我们冲突的文件
+git status
+# On branch master
+# Your branch is ahead of 'origin/master' by 2 commits.
+#
+# Unmerged paths:
+# (use "git add/rm <file>..." as appropriate to mark resolution)
+#
+# both modified: readme.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+告诉我们readme存在冲突
+查看readme
+Git is a distributed version control system.
+Git is free software distributed under the GPL.
+Git has a mutable index called stage.
+Git tracks changes of files.
+<<<<<<< HEAD
+Creating a new branch is quick & simple.
+=======
+Creating a new branch is quick AND simple.
+>>>>>>> dev 
+Git用<<<<<<<，=======，>>>>>>>标记出不同分⽀支的内容
+这时候我们再提交
+git add readme.txt
+git commit -m ""
+这样就合并了
+用带参数的git log也可以看到分⽀支的合并情况：
+git log --graph --pretty=oneline --abbrev-commit
+或者git log --graph
+
+分支管理策略
+一般合并的时候会采用“Fast forward”模式，这种模式下，删除分支后，会丢掉分支信息。
+如果要强制禁用 “Fast forward”模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。
+1.创建新分支：git checkout -b dev
+2.修改readme文件
+3.提交：git add readme && git commit -m ""
+4.切换回master分支：git checkout master
+5.合并分支，使用“--no-ff”参数表示禁用“fast forward”：git merge --no-ff -m “” dev
+加“--no-ff”参数表示用普通模式合并，合并后可以看出历史分支。
+分支策略:
+在实际开发中，要采用多条分支，在其他分支上面干活更新代码，master分支主要用户发布新版本的时候才会改变，一般情况下不会合并。
+Bug分支：
+Bug分支用来修复bug，临时创建，切换到bug分区，提交修复，修复之后，将临时分支删除。
+当工作只进行到一半，需要修改bug的时候，（这时候切换分支会报错）可以使用git stash把现在的修改文件藏起来，之后使用git status查看状态。
+隐藏/恢复文件的步骤:
+1.切换到当前开发分区
+2.git stash list #查看隐藏内容
+3.两种方法恢复：
+3.1 git stash pop  #当list里面只有一个工作区的时候，可以使用pop，恢复的同时会删除stash内容。
+3.2 git stash apply stash@{0} #当list有多个工作区的时候，使用apply 加上stash@{NUM} 来恢复工作区，恢复之后需要手动删除
+git stash drop stash@{num} 删除使用
+
+Feature 分支
+软件开发中，总有无穷无尽的新的功能要不断添加进来。
+添加一个新功能时，你肯定不希望因为一些实验性质的代码，把主分支搞乱了，所以，每添加一个新功能，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支。
+1.git checkout -b feature-vulcan
+2.git status
+3.git checkout dev
+分支没有合并，上级通知突然不做了，要取消这个分支
+git branch -d feature-vulcan	##销毁失败，需要强制销毁
+git branch -D feature-valcan	##强制销毁分支
+
+多人协作
+
+#git remote | git remote -v	#查看远程仓库信息
+推送分支
+1. git push origin master	#origin 指远程仓库在本机的命名，master指分支
+一般情况下：
+• master分支是主分支，因此要时刻与远程同步；
+• dev分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；
+• bug分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；
+• feature分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。
+抓取分支
+git clone git@github.com:MH-zook/repository.git
+这时候获取的只有master分支
+你可以在本地创建和远程对应的分支，使用git checkout -b branch-name origin/branchname，本地和远程分支的名称最好一致。
+多人协作的情况下，如果远程仓库和本地仓库内容不一致，这时候你推送你的内容会去送不了。需要先拉取远程仓库的内容：
+2.git pull or git pull -u origin banchname	#一般第一次拉取需要-u
+3.git 如果pull也失败了，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：
+git branch --set-upstream dev origin/dev
+再次git pull
+4.这回git pull成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，提交，再push：
+# git commit -m "merge & fix hello.py"
+# git push origin dev
+1. 首先，可以试图用git push origin branch-name推送自己的修改；
+2. 如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+3. 如果合并有冲突，则解决冲突，并在本地提交；
+4. 没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
+疑问1：怎么获取远程仓库的其他分支的内容？
+疑问2：使用“--no-ff”这个参数怎么判断分支的改变？
+
+
+
+
+
+
+
+
+
+
+
