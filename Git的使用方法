@@ -29,7 +29,7 @@ git stash list				##查看当前隐藏文件
 git stash pop  				#当list里面只有一个工作区的时候，可以使用pop，恢复的同时会删除stash内容
 git stash apply stash@{0} 		#当list有多个工作区的时候，使用apply 加上stash@{NUM} 来恢复工作区，恢复之后需要手动删除
 git stash drop stash@{num}		##删除隐藏文件
-git clone git@github.com:MH-zook/repository.git
+git clone git@github.com:MH-zook/repository.git		##克隆远程仓库到本地仓库
 git pull -u origin master		##拉取远程信息
 git push -u origin master		##推动本地信息到远程
 标签管理待更新
