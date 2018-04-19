@@ -3,32 +3,35 @@ Git：分布式版本控制系统
 对应的有集中式版本控制系统 CVS、SVN
 分布式版本控制系统简单介绍：分布式版本控制系统就是把仓库（文件）放在多个计算机上，每台计算机上都有一个本地仓库，当一台计算机的文件修改之后，通过提交修改内容，其它计算机也会同步修改内容。
 Git使用方法主要有一下几个命令：
-yum install git					##安装Git
+yum install git				##安装Git
 git remote add origin git@github.com:MH-zook/zook.git		##关联远程仓库
-git init 版本库名称				##创建版本库
-git add filename				##向仓库中添加文件
-git status						##查看仓库状态
+git init 版本库名称			##创建版本库
+git add filename			##向仓库中添加文件
+git status				##查看仓库状态
 git commit -m "inpu the flag"		##提交添加的文件到仓库
-git log						##查看仓库日志信息
-git log --pretty=oneline			##查看日志--简洁版
-git reflog 						##查看历史文件版本号
+git log					##查看仓库日志信息
+git log --pretty=oneline		##查看日志--简洁版
+git reflog 				##查看历史文件版本号
 git reset --hard HEAD			##查看当前版本信息
 git reset --hard 版本号			##时光穿梭到历史版本
 git checkout -b branchname		##创建远程分支，并切换分支
 git branch branchname			## 创建远程分支
-git checkout branchname		##切换远程分支
+git checkout branchname			##切换远程分支
+git branch				##查看本地分支
+git branch -r				##查看远程分支
+git branch -a 				##查看所有分支
 git branch -d branchname		##删除本地分支
 git branch -r -D branchname		##删除远端分支
 git push origin :branchname		##推送空的分支到远程分支/删除分支
 git merge branchname			##合并当前分支内容到branchname
-git stash						##隐藏当前正在编辑的文件
-git stash list					##查看当前隐藏文件
+git stash				##隐藏当前正在编辑的文件
+git stash list				##查看当前隐藏文件
 git stash pop  		#当list里面只有一个工作区的时候，可以使用pop，恢复的同时会删除stash内容
 git stash apply stash@{0} 	#当list有多个工作区的时候，使用apply 加上stash@{NUM} 来恢复工作区，恢复之后需要手动删除
 git stash drop stash@{num}		##删除隐藏文件
 git clone git@github.com:MH-zook/repository.git
-git pull -u origin master			##拉取远程信息
-git push -u origin master			##推动本地信息到远程
+git pull -u origin master		##拉取远程信息
+git push -u origin master		##推动本地信息到远程
 标签管理待更新
 
 
