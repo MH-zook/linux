@@ -1,11 +1,14 @@
-ÊµÑé-»ù´¡²Ù×÷
-touch .abc
-touch fi\\e
-touch 'fi\e'
+#umask
+#chmod
+#chown
+#chattr
+#lsattr
+#setfacl
+#getfacl
 
-umast¿¿¿......
+umast¿¿......
 
-ÊµÑé-¸ü¸ÄÎÄ¼þÈ¨ÏÞ
+¿¿-¿¿¿¿¿¿
 touch file1
 chown zook:zook file1
 chown root file1
@@ -15,29 +18,29 @@ mkdir zook/
 chmod g+w zook
 chmod o=rw file1
 
-¸ü¸ÄÎÄ¼þ|Ä¿Â¼µÄÊôÐÔ
-ÊµÑé-chattrºÍlsattr
+¿¿¿¿|¿¿¿¿¿
+¿¿-chattr¿lsattr
 lsattr /etc/resolv.conf
-chattr +i /etc/resolv.conf	#²»ÄÜÐÞ¸Ä£¬²»ÄÜÉ¾³ý
-lsattr /etc/resolv.conf		#²é¿´ÎÄ¼þµÄÌØÊâÊôÐÔ
-chattr -i +a /etc/resolv.conf	#Ö»ÄÜ×·¼Ó£¬²»ÄÜÉ¾³ý
+chattr +i /etc/resolv.conf	#¿¿¿¿¿¿¿¿¿
+lsattr /etc/resolv.conf		#¿¿¿¿¿¿¿¿¿
+chattr -i +a /etc/resolv.conf	#¿¿¿¿¿¿¿¿¿
 lsattr /etc/resolv.conf
 echo qin >> /etc/resolv.conf	
 
-ÎÄ¼þ|Ä¿Â¼µÄ·ÃÎÊ¿ØÖÆ²ßÂÔ
-ÊµÑé-setfacl
+¿¿|¿¿¿¿¿¿¿¿¿
+¿¿-setfacl
 mkdir /zook
 touch /zook/zkai
 su - zook
-rm /zook/zkai		#È¨ÏÞ²»×ã
+rm /zook/zkai		#¿¿¿¿
 setfacl -m u:zook:rwx -R /zook
 getfacl /zook/zkai
 su - zook
-rm /zook/zkai		#¿ÉÒÔÉ¾³ý
+rm /zook/zkai		#¿¿¿¿
 setfacl -m d:u:zook:rwx /zkai
 setfacl -x u:qin /zook/zkai
 
-ÊµÑé-Á´½Ó
+¿¿-¿¿
 cp /etc/passwd passwd1
 ln -s /etc/passwd passwd2
 ln /etc/passwd passwd3
