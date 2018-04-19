@@ -1,19 +1,18 @@
 ÊµÑé-»ù´¡²Ù×÷
-ll -a /home/qin
 touch .abc
 touch fi\\e
 touch 'fi\e'
 
-umast
+umast¿¿¿......
 
 ÊµÑé-¸ü¸ÄÎÄ¼şÈ¨ÏŞ
 touch file1
-chown qin:qin file1
+chown zook:zook file1
 chown root file1
 chown :root file1
 chmod o+rwx file1
-mkdir qin/
-chmod g+w qin
+mkdir zook/
+chmod g+w zook
 chmod o=rw file1
 
 ¸ü¸ÄÎÄ¼ş|Ä¿Â¼µÄÊôĞÔ
@@ -27,16 +26,16 @@ echo qin >> /etc/resolv.conf
 
 ÎÄ¼ş|Ä¿Â¼µÄ·ÃÎÊ¿ØÖÆ²ßÂÔ
 ÊµÑé-setfacl
-mkdir /caiwubu
-touch /caiwubu/zhangben
-su - qin
-rm /caiwubu/zhangben	#È¨ÏŞ²»×ã
-setfacl -m u:qin:rwx -R /caiwubu
-getfacl /caiwubu/zhangben
-su - qin
-rm /caiwubu/zhangben	#¿ÉÒÔÉ¾³ı
-setfacl -m d:u:qin:rwx /caiwubu
-setfacl -x u:qin /caiwubu/zhangben
+mkdir /zook
+touch /zook/zkai
+su - zook
+rm /zook/zkai		#È¨ÏŞ²»×ã
+setfacl -m u:zook:rwx -R /zook
+getfacl /zook/zkai
+su - zook
+rm /zook/zkai		#¿ÉÒÔÉ¾³ı
+setfacl -m d:u:zook:rwx /zkai
+setfacl -x u:qin /zook/zkai
 
 ÊµÑé-Á´½Ó
 cp /etc/passwd passwd1
