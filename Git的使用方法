@@ -1,7 +1,8 @@
 Git使用方法
 Git：分布式版本控制系统
 对应的有集中式版本控制系统 CVS、SVN
-分布式版本控制系统简单介绍：分布式版本控制系统就是把仓库（文件）放在多个计算机上，每台计算机上都有一个本地仓库，当一台计算机的文件修改之后，通过提交修改内容，其它计算机也会同步修改内容。
+分布式版本控制系统简单介绍：分布式版本控制系统就是把仓库（文件）放在多个计算机上，每台计算机上
+都有一个本地仓库，当一台计算机的文件修改之后，通过提交修改内容，其它计算机也会同步修改内容。
 Git使用方法主要有一下几个命令：
 yum install git				##安装Git
 git remote add origin git@github.com:MH-zook/zook.git		##关联远程仓库
@@ -26,8 +27,10 @@ git push origin :branchname		##推送空的分支到远程分支/删除分支
 git merge branchname			##合并当前分支内容到branchname
 git stash				##隐藏当前正在编辑的文件
 git stash list				##查看当前隐藏文件
-git stash pop  				#当list里面只有一个工作区的时候，可以使用pop，恢复的同时会删除stash内容
-git stash apply stash@{0} 		#当list有多个工作区的时候，使用apply 加上stash@{NUM} 来恢复工作区，恢复之后需要手动删除
+git stash pop  				#当list里面只有一个工作区的时候，可以使用pop，恢复的
+同时会删除stash内容
+git stash apply stash@{0} 		#当list有多个工作区的时候，使用apply 加上stash@{NUM} 
+来恢复工作区，恢复之后需要手动删除
 git stash drop stash@{num}		##删除隐藏文件
 git clone git@github.com:MH-zook/repository.git		##克隆远程仓库到本地仓库
 git pull -u origin master		##拉取远程信息
@@ -42,7 +45,9 @@ git fetch origin 远程分支名:本地分支名		##拉取远程分支信息(2)
 #yum install git
 or
 ubuntu and Debian系统
-$sudo apt-get install git  ##老一点的Debian或Ubuntu Linux，要把命令改为“sudo apt-get install git-core”，因为以前有个软件也叫GIT（GNU Interactive 		Tools），结果Git就只能叫git-core了。由于Git名气实在太大，后来就把GNU Interactive Tools改成gnuit，git-core正式改为git。
+$sudo apt-get install git  ##老一点的Debian或Ubuntu Linux，要把命令改为“sudo apt-get install git-core”，
+因为以前有个软件也叫GIT（GNU Interactive Tools），结果Git就只能叫git-core了。由于Git名气实在太大，后来
+就把GNU Interactive Tools改成gnuit，git-core正式改为git。
 源码安装：先从Git官网下载源码，然后解压，依次输入：./config，make，sudo make install这几个命令安装就好了。
 
 2.Git init创建版本库 
@@ -197,8 +202,10 @@ git checkout -- filename ##恢复版本库的文件到工作区
 1.新建远程仓库
 2.ssh-keygen -t rsa -C "youremail@example.com"
 3.ADD SSH kye
-4.关联远程仓库  git remote add origin git@github.com:MH-zook/zook.git	#origin指远程仓库在本地的标识，MH-zook指github的用户名，zook指远程仓库名
-5.git push -u origin master	#由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+4.关联远程仓库  git remote add origin git@github.com:MH-zook/zook.git	#origin指远程仓库在本地的标识，
+MH-zook指github的用户名，zook指远程仓库名
+5.git push -u origin master	#由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把
+本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
 5.1以后可以使用:#git push origin master 
 
 
@@ -217,7 +224,8 @@ git branch hero		#创建hero分支
 git checkout 分支名	#切换分支
 git merge hero -m "massege"	#如果当前分支是master 就是把hero的内容合并到master
 git branch -d branchname	#删除分支
-注：当在hero分支修改文件之后，需要提交才可以切换分支（也可以隐藏），切换分支后合并master分支，然后master分支可以不用提交，直接push --all 到远程仓库 也可以git push -u origin master只同步这一个分支的更新
+注：当在hero分支修改文件之后，需要提交才可以切换分支（也可以隐藏），切换分支后合并master分支，然后master分支可以不用提交，
+直接push --all 到远程仓库 也可以git push -u origin master只同步这一个分支的更新
 
 
 解决冲突
@@ -295,7 +303,8 @@ git stash drop stash@{num} 删除使用
 
 Feature 分支
 软件开发中，总有无穷无尽的新的功能要不断添加进来。
-添加一个新功能时，你肯定不希望因为一些实验性质的代码，把主分支搞乱了，所以，每添加一个新功能，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支。
+添加一个新功能时，你肯定不希望因为一些实验性质的代码，把主分支搞乱了，所以，每添加一个新功能，最好新建一个feature分支，在上面开发，
+完成后，合并，最后，删除该feature分支。
 1.git checkout -b feature-vulcan
 2.git status
 3.git checkout dev
