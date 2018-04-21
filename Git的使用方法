@@ -6,6 +6,7 @@ Git：分布式版本控制系统
 Git使用方法主要有一下几个命令：
 yum install git				#安装Git
 git remote add origin git@github.com:MH-zook/zook.git		#关联远程仓库
+git remote rm <name>			#删除远程仓库
 git init 版本库名称			#创建版本库
 git add filename			#向仓库中添加文件
 git status				#查看仓库状态
