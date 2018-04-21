@@ -8,9 +8,10 @@ yum install git				#安装Git
 git remote add origin git@github.com:MH-zook/zook.git		#关联远程仓库
 git remote rm <name>			#删除远程仓库
 git init 版本库名称			#创建版本库
-git add filename			#向仓库中添加文件
-git status				#查看仓库状态
-git commit -m "inpu the flag"		#提交添加的文件到仓库
+git add <filename>			#添加文件到暂存区
+git rm <filename>			#删除暂存区和工作区文件
+git status				#查看工作区和暂存区文件状态
+git commit -m "inpu the flag"		#提交暂存区文件到仓库
 git log					#查看仓库日志信息
 git log --pretty=oneline		#查看日志--简洁版
 git reflog 				#查看历史文件版本号
@@ -36,7 +37,7 @@ git stash drop stash@{num}		#删除隐藏文件
 git clone git@github.com:MH-zook/repository.git		#克隆远程仓库到本地仓库
 git pull -u origin master		#拉取远程信息
 git push -u origin master		#推动本地信息到远程
-git checkout -b 本地分支名 origin/远程分支名		#拉取远程分支信息(1)
+git checkout -b 本地分支名 origin/远程分支名	#拉取远程分支信息(1)
 git fetch origin 远程分支名:本地分支名		#拉取远程分支信息(2)
 标签管理待更新
 
