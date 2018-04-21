@@ -36,8 +36,10 @@ git stash apply stash@{0} 		#当list有多个工作区的时候，使用apply �
 git stash drop stash@{num}		#删除隐藏文件
 git clone git@github.com:MH-zook/repository.git		#克隆远程仓库到本地仓库
 git pull -u origin master		#拉取远程信息
-git push -u origin master		#推动本地信息到远程
+git push -u origin master		#推送本地信息到远程
+git push --all				#推送本地所有分支内容到远程
 git checkout -b 本地分支名 origin/远程分支名	#拉取远程分支信息(1)
+
 git fetch origin 远程分支名:本地分支名		#拉取远程分支信息(2)
 标签管理待更新
 
